@@ -5,7 +5,10 @@ export const fetchMovies = (query={}) => {
       dispatch(fetchMoviesStarted());
       try {
           
-        dispatch(fetchMoviesSuccess([]));
+        dispatch(fetchMoviesSuccess({
+            movies: [],
+            total: 0
+        }));
       } catch (error) {
         dispatch(fetchMoviesError(error));
       }
@@ -20,14 +23,14 @@ export const fetchMoviesStarted = () => {
 
 export const fetchMoviesError = (error) => {
     return {
-        error,
+        payload: error,
         type: actionTypes.FETCH_MOVIES_ERROR
     };
 };
 
-export const fetchMoviesSuccess = (movies) => {
+export const fetchMoviesSuccess = (payload) => {
     return {
-        payload: movies,
+        payload,
         type: actionTypes.FETCH_MOVIES_SUCCESS
     };
 };
