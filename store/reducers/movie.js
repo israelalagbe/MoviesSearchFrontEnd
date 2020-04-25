@@ -7,7 +7,7 @@ const initialState = {
   error: null
 }
 
-const reducer = (state = initialState, action) => {
+const movieReducer = (state = initialState, action) => {
   const stateClone = {...state};
   switch(action.type) {
     case actionTypes.FETCH_MOVIES:{
@@ -30,4 +30,4 @@ const reducer = (state = initialState, action) => {
   return stateClone;
 };
 
-export default reducer;
+export default movieReducer;
