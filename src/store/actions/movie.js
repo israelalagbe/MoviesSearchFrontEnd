@@ -1,4 +1,4 @@
-import * as actionTypes from './ActionTypes';
+import * as actionTypes from './actionTypes';
 
 export const fetchMovies = (query={}) => {
     return dispatch => {
@@ -6,8 +6,8 @@ export const fetchMovies = (query={}) => {
       try {
           
         dispatch(fetchMoviesSuccess({
-            movies: [],
-            total: 0
+            movies: [1,2,4],
+            total: 5
         }));
       } catch (error) {
         dispatch(fetchMoviesError(error));

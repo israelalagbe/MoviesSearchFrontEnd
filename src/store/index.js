@@ -12,15 +12,13 @@ const logger = store => {
         return action => {
             console.log('[middleWare]: dispatching', action);
             const result = next(action);
-            console.log('[middleWare]: nextState', store.getState());
             return result;
         }
     }
 }
 
 const rootReducer = combineReducers({
-    /**/
-    movieReducer
+    movie: movieReducer
 });
 
 export default createStore(rootReducer, applyMiddleware(logger, thunk));
