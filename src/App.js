@@ -12,7 +12,8 @@ function App() {
   },[dispatch]);
   return (
     <div className="App">
-      Hello world {movies} {total}
+      Hello world {total} <br />
+      {movies.map((movie)=><div>{movie.title}</div>)} 
     </div>
   );
 }
