@@ -1,14 +1,22 @@
 body {
+  padding-top: 30px;
   font-size: 25px;
   font-family: 'Noto Serif JP', sans-serif;
 }
 
 .table-header {
   font-size: 20px !important;
+  /* min-width: 200px; */
 }
 
 .tableContainer {
   margin-top: 30px !important;
-  width: 90%;
+  width: 90% !important;
   margin: 0 auto;
+}
+
+@media(max-width: 767px) {
+  .tableContainer {
+    width: 90% !important;
+  }
 }

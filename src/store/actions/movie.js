@@ -3,11 +3,13 @@ import api from '../../util/api';
 import delay from '../../util/delay';
 
 const baseUrl = "http://127.0.0.1:3000/api";
-export const fetchMovies = ({page, limit}) => {
+export const fetchMovies = (query) => {
     return async (dispatch) => {
       dispatch(fetchMoviesStarted());
       try {
-        const {movies, total} = await api.get(`${baseUrl}/movies?page=${page}&limit=${limit}`);
+        const {movies, total} = await api.get(`${baseUrl}/movies`,{
+          params: query
+        });
         dispatch(fetchMoviesSuccess({
             movies,
             total
