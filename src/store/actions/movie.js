@@ -2,17 +2,21 @@ import * as actionTypes from './actionTypes';
 import api from '../../util/api';
 
 const baseUrl = "http://127.0.0.1:3000/api";
-export const fetchMovies = (query={}) => {
+export const fetchMovies = ({page, limit}) => {
     return async (dispatch) => {
       dispatch(fetchMoviesStarted());
       try {
-        const {movies, total} = await api.get(`${baseUrl}/movies`)
+        const {movies, total} = await api.get(`${baseUrl}/movies?page=${page}&limit=${limit}`);
+
         dispatch(fetchMoviesSuccess({
             movies,
             total
         }));
+
       } catch (error) {
+
         dispatch(fetchMoviesError(error));
+        
       }
     }
   };

@@ -1,0 +1,14 @@
+body {
+  font-size: 25px;
+  font-family: 'Noto Serif JP', sans-serif;
+}
+
+.table-header {
+  font-size: 20px !important;
+}
+
+.tableContainer {
+  margin-top: 30px !important;
+  width: 90%;
+  margin: 0 auto;
+}
