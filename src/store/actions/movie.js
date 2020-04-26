@@ -8,7 +8,6 @@ export const fetchMovies = ({page, limit}) => {
       dispatch(fetchMoviesStarted());
       try {
         const {movies, total} = await api.get(`${baseUrl}/movies?page=${page}&limit=${limit}`);
-        await delay(3000);
         dispatch(fetchMoviesSuccess({
             movies,
             total

@@ -25,7 +25,8 @@ export default () => {
   const dispatch = useDispatch();
   const [page, setPage] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
-  const { movies, total } = useSelector((state) => state.movie);
+
+  const { movies, total, loading } = useSelector((state) => state.movie);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

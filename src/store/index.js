@@ -4,8 +4,10 @@ import {
     combineReducers,
     applyMiddleware
 } from 'redux';
+import { loadingBarReducer } from 'react-redux-loading-bar'
 import thunk from 'redux-thunk';
 import movieReducer from './reducers/movie';
+
 /* MiddleWare: logger */
 const logger = store => {
     return next => {
@@ -18,7 +20,8 @@ const logger = store => {
 }
 
 const rootReducer = combineReducers({
-    movie: movieReducer
+    movie: movieReducer,
+    loadingBar: loadingBarReducer,
 });
 
 export default createStore(rootReducer, applyMiddleware(logger, thunk));
