@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import api from '../../util/api';
+import delay from '../../util/delay';
 
 const baseUrl = "http://127.0.0.1:3000/api";
 export const fetchMovies = ({page, limit}) => {
@@ -7,7 +8,7 @@ export const fetchMovies = ({page, limit}) => {
       dispatch(fetchMoviesStarted());
       try {
         const {movies, total} = await api.get(`${baseUrl}/movies?page=${page}&limit=${limit}`);
-
+        await delay(3000);
         dispatch(fetchMoviesSuccess({
             movies,
             total
@@ -16,7 +17,7 @@ export const fetchMovies = ({page, limit}) => {
       } catch (error) {
 
         dispatch(fetchMoviesError(error));
-        
+
       }
     }
   };

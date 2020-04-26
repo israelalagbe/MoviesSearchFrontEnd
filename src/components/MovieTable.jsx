@@ -45,7 +45,7 @@ export default () => {
 
   return (
     <Paper className="tableContainer">
-      <Table>
+      <Table stickyHeader>
         <TableHead>
           <TableRow>
             <TableCell className="table-header">Title</TableCell>
