@@ -8,7 +8,7 @@ function sleep(delay = 0) {
   });
 }
 
-export default function SearchForm({searchText, setSearchText}) {
+function SearchForm({searchText, setSearchText}) {
 
   const items = [
     {
@@ -59,3 +59,4 @@ export default function SearchForm({searchText, setSearchText}) {
           />
   );
 }
+export default React.memo(SearchForm);
