@@ -19,7 +19,9 @@ const api = Axios.create({
     withCredentials: false,
 });
 api.interceptors.request.use(function (config) {
-    showLoadingBar()
+    if (!config.url.includes('movies/completions')) {
+        showLoadingBar()
+    }
     return config;
 }, function (error) {
     hideLoadingBar()

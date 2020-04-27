@@ -80,7 +80,7 @@ export default () => {
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
+      <Paper className={`${classes.paper} tableContainer`}>
         <Grid container direction="row" justify="center" spacing={5}>
           <Grid spacing={3} item md={4} xs={11} className={classes.form}>
             <SearchForm searchText={search} setSearchText={setSearchText} />

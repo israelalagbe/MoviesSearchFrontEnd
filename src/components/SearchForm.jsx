@@ -1,62 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMoviesCompletions } from '../store/actions/movie';
+import debounce from '../util/debounce';
 
-function sleep(delay = 0) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
 
-function SearchForm({searchText, setSearchText}) {
 
-  const items = [
-    {
-      id: 0,
-      name: "Cobol",
-    },
-    {
-      id: 1,
-      name: "JavaScript"
-    },
-    {
-      id: 2,
-      name: "Basic"
-    },
-    {
-      id: 3,
-      name: "PHP"
-    },
-    {
-      id: 4,
-      name: "Java"
-    },
-  ];
+function SearchForm({ setSearchText }) {
 
-  const handleOnSearch = (string, cached) => {
-    console.log(string, cached);
+  const dispatch = useDispatch();
+  const { moviesCompletions, loading } = useSelector((state) => state.movie);
+
+  const debouncedSetSearchText = debounce(setSearchText,500);
+
+  const handleOnSearch = (text) => {
+
+    text= text.trim();
+    dispatch(fetchMoviesCompletions({ search: text }));
+    debouncedSetSearchText(text);
+
   }
 
   const handleOnSelect = item => {
-    setSearchText(item)
-    console.log(item);
+    handleOnSearch(item.name)
   }
 
   const handleOnFocus = () => {
-    console.log("Focused");
+    dispatch(fetchMoviesCompletions({ search: '' }));
   }
 
+ 
 
   return (
     <ReactSearchAutocomplete
-            
-            placeholder="Search Movies"
-            items={items}
-            onSearch={setSearchText}
-            onSelect={handleOnSelect}
-            onFocus={handleOnFocus}
-            autoFocus
-          />
+
+      placeholder="Search Movies"
+      items={moviesCompletions}
+      onSearch={handleOnSearch}
+      onSelect={handleOnSelect}
+      onFocus={handleOnFocus}
+      autoFocus
+    />
   );
 }
 export default React.memo(SearchForm);
