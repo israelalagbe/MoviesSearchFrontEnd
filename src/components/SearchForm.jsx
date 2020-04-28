@@ -23,11 +23,15 @@ function SearchForm({ setSearchText }) {
   }
 
   const handleOnSelect = item => {
-    handleOnSearch(item.name)
+
+    debouncedSetSearchText(item.name);
+
   }
 
   const handleOnFocus = () => {
+
     dispatch(fetchMoviesCompletions({ search: '' }));
+    
   }
 
  
