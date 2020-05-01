@@ -34,7 +34,7 @@ api.interceptors.response.use(function (response) {
     return response.data;
 }, function (err) {
     hideLoadingBar();
-    return err;
+    return Promise.reject(err);
 });
 
 export default api;

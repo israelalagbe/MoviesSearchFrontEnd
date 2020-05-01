@@ -104,7 +104,7 @@ export default () => {
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, 30, 40, 50]}
-                colSpan={1}
+                colSpan={3}
                 count={total}
                 rowsPerPage={limit}
                 page={page}

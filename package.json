@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-notifications": "^1.6.0",
     "react-redux": "^7.2.0",
     "react-redux-loading-bar": "^4.6.0",
     "react-scripts": "3.4.0",

@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import api from '../../util/api';
 import delay from '../../util/delay';
+import { NotificationManager } from 'react-notifications';
 
 const baseUrl = "http://127.0.0.1:3000/api";
 export const fetchMovies = (query) => {
@@ -21,7 +22,7 @@ export const fetchMovies = (query) => {
     } catch (error) {
 
       dispatch(fetchMoviesError(error));
-
+      NotificationManager.error("Error occured while loading movies, please check your internet connection!")
     }
   }
 };
