@@ -30,11 +30,13 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'right'
     },
     paper: {
-        minWidth: '500px',
-        maxWidth: '600px',
+        width: '500px',
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
+        [theme.breakpoints.down(780)]: {
+            width: '90%'
+        }
     },
 }));
 
