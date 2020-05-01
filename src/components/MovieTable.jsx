@@ -34,36 +34,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20,
     minWidth: 750,
   },
-  form:{
+  form: {
     zIndex: 1000
   }
 }));
 
-const RecordTableRow = ({ movie }) => (
-  <TableRow>
-    <TableCell>{movie.title}</TableCell>
-    <TableCell>{movie.year}</TableCell>
-    <TableCell>{
-      movie.cast.map((name, index) =>
-        <Chip key={index} color='secondary' label={name} />
-      )
-    }</TableCell>
-    <TableCell>{
-      movie.genres.map((genre, index) =>
-        <Chip key={index}  color='primary' label={genre} />
-      )
-    }</TableCell>
-    <TableCell>
-      <Button
-        variant="contained"
-        color="default"
-        startIcon={<Chat />}
-      >
-        Comments
-      </Button>
-    </TableCell>
-  </TableRow>
-);
+
 
 export default () => {
   const classes = useStyles();
@@ -95,51 +71,51 @@ export default () => {
 
   return (
     <div className={classes.root}>
-      <CommentModal />
+      <CommentModal isOpen={commentModal.isOpen} handleClose={commentModal.close} />
       <Paper className={`${classes.paper} tableContainer`}>
         <Grid container direction="row" justify="center" spacing={2}>
           <Grid item md={4} xs={11} className={classes.form}>
             <SearchForm searchText={search} setSearchText={setSearchText} />
-            
+
           </Grid>
-          <Grid  item md={12} className={classes.form}>
+          <Grid item md={12} className={classes.form}>
             <YearSearch year={year} setYear={setYear} />
           </Grid>
         </Grid>
         <TableContainer>
-        <Table stickyHeader className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell className="table-header">Title</TableCell>
-              <TableCell className="table-header">Year</TableCell>
-              <TableCell className="table-header">Actors</TableCell>
-              <TableCell className="table-header">Genres</TableCell>
-              <TableCell className="table-header">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {movies.map((movie, index) => <RecordTableRow key={index} movie={movie} />)}
+          <Table stickyHeader className={classes.table}>
+            <TableHead>
+              <TableRow>
+                <TableCell className="table-header">Title</TableCell>
+                <TableCell className="table-header">Year</TableCell>
+                <TableCell className="table-header">Actors</TableCell>
+                <TableCell className="table-header">Genres</TableCell>
+                <TableCell className="table-header">Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {movies.map((movie, index) => <RecordTableRow onCommentClicked={commentModal.open} key={index} movie={movie} />)}
 
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25, 30, 40, 50]}
-                colSpan={3}
-                count={total}
-                rowsPerPage={limit}
-                page={page}
-                SelectProps={{
-                  inputProps: { 'aria-label': 'rows per page' },
-                  native: true,
-                }}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-              />
-            </TableRow>
-          </TableFooter>
-        </Table>
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25, 30, 40, 50]}
+                  colSpan={3}
+                  count={total}
+                  rowsPerPage={limit}
+                  page={page}
+                  SelectProps={{
+                    inputProps: { 'aria-label': 'rows per page' },
+                    native: true,
+                  }}
+                  onChangePage={handleChangePage}
+                  onChangeRowsPerPage={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                />
+              </TableRow>
+            </TableFooter>
+          </Table>
 
         </TableContainer>
       </Paper>
@@ -147,3 +123,30 @@ export default () => {
 
   );
 };
+
+const RecordTableRow = ({ movie, onCommentClicked }) => (
+  <TableRow>
+    <TableCell>{movie.title}</TableCell>
+    <TableCell>{movie.year}</TableCell>
+    <TableCell>{
+      movie.cast.map((name, index) =>
+        <Chip key={index} color='secondary' label={name} />
+      )
+    }</TableCell>
+    <TableCell>{
+      movie.genres.map((genre, index) =>
+        <Chip key={index} color='primary' label={genre} />
+      )
+    }</TableCell>
+    <TableCell>
+      <Button
+        onClick={() => onCommentClicked(movie)}
+        variant="contained"
+        color="default"
+        startIcon={<Chat />}
+      >
+        Comments
+      </Button>
+    </TableCell>
+  </TableRow>
+);
