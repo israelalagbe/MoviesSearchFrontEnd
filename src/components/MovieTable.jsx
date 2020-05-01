@@ -88,7 +88,7 @@ export default () => {
             <SearchForm searchText={search} setSearchText={setSearchText} />
 
           </Grid>
-          <Grid item md={12} className={classes.form}>
+          <Grid item md={12}>
             <YearSearch year={year} setYear={setYear} />
           </Grid>
         </Grid>
