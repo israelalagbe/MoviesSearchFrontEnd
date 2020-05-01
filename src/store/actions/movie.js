@@ -3,7 +3,9 @@ import api from '../../util/api';
 import delay from '../../util/delay';
 import { NotificationManager } from 'react-notifications';
 
-const baseUrl = "http://127.0.0.1:3000/api";
+// const baseUrl = "http://127.0.0.1:3000/api";
+const baseUrl = "https://checkdc-movie.herokuapp.com/api";
+
 
 export const fetchMovies = (query) => {
   return async (dispatch) => {
