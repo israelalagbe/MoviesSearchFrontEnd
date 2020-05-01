@@ -3,6 +3,7 @@ body {
   font-size: 25px;
   font-family: 'Noto Serif JP', sans-serif;
 }
+*{outline: none;}
 .notification-container{
   z-index: 3939393939939 !important;
 }

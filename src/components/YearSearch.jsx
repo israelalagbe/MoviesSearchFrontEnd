@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: 'auto',
     width: '300px',
-    padding:'50px',
     height: '40px',
     background: 'white',
     outline:'none',
@@ -31,7 +30,7 @@ export default function YearSearch({year, setYear}) {
   return (
     <div className={classes.center}>
         <select onChange={(e)=> setYear(e.target.value)} value={year} name="" id="" className={classes.formControl}>
-            <option value='' disabled>Filter By Year</option>
+            <option value=''>Filter By Year</option>
             {years.map((year)=> <option key={year}>{year}</option>)}
         </select>
     </div>

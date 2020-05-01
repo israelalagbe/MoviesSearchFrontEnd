@@ -10,13 +10,15 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableContainer from '@material-ui/core/TableContainer';
 import Chip from '@material-ui/core/Chip';
-
+import Chat from '@material-ui/icons/Chat';
 import { fetchMovies } from '../store/actions/movie';
 import TablePaginationActions from './TablePagination';
 import Grid from '@material-ui/core/Grid';
 import SearchForm from './SearchForm';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Button } from '@material-ui/core';
 import YearSearch from './YearSearch';
+import useModal from '../util/useModal';
+import CommentModal from './CommentModal';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 750,
   },
   form:{
-    zIndex: 10000000
+    zIndex: 1000
   }
 }));
 
@@ -51,12 +53,23 @@ const RecordTableRow = ({ movie }) => (
         <Chip key={index}  color='primary' label={genre} />
       )
     }</TableCell>
+    <TableCell>
+      <Button
+        variant="contained"
+        color="default"
+        startIcon={<Chat />}
+      >
+        Comments
+      </Button>
+    </TableCell>
   </TableRow>
 );
 
 export default () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const commentModal = useModal();
+
   const [page, setPage] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
   const [year, setYear] = React.useState('');
@@ -82,6 +95,7 @@ export default () => {
 
   return (
     <div className={classes.root}>
+      <CommentModal />
       <Paper className={`${classes.paper} tableContainer`}>
         <Grid container direction="row" justify="center" spacing={2}>
           <Grid item md={4} xs={11} className={classes.form}>
@@ -100,6 +114,7 @@ export default () => {
               <TableCell className="table-header">Year</TableCell>
               <TableCell className="table-header">Actors</TableCell>
               <TableCell className="table-header">Genres</TableCell>
+              <TableCell className="table-header">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

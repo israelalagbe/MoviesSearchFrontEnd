@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       {/* This needs inline styling to work */}
-      <LoadingBar showFastActions style={{ backgroundColor: 'red', height: '5px', zIndex: 1000, top: 0, position: 'fixed' }} />
+      <LoadingBar showFastActions style={{ backgroundColor: 'red', height: '5px', zIndex: 2000, top: 0, position: 'fixed' }} />
       <NotificationContainer />
 
       <MovieTable />
