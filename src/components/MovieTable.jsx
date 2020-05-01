@@ -100,7 +100,7 @@ export default () => {
                 <TableCell className="table-header">
                   <TableSortLabel
                     active={Boolean(yearSort)}
-                    direction={yearSort||'sort'}
+                    direction={yearSort||'asc'}
                     onClick={toggleYearSort}
                   >
                     Year (sort)
