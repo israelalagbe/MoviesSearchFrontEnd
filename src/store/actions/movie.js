@@ -61,7 +61,7 @@ export const addCommentToMovie = (payload) => {
     } catch (error) {
 
       dispatch(fetchMoviesCompletionsError(error));
-
+      NotificationManager.error("Error occured while adding comment, please check your internet connection!")
     }
   }
 };
