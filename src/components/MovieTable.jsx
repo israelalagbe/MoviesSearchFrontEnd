@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableContainer from '@material-ui/core/TableContainer';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Chip from '@material-ui/core/Chip';
 import Chat from '@material-ui/icons/Chat';
 import { fetchMovies } from '../store/actions/movie';
@@ -45,16 +46,17 @@ export default () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const commentModal = useModal();
-  
+
 
   const [page, setPage] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
   const [year, setYear] = React.useState('');
   const [search, setSearchText] = React.useState('');
+  const [yearSort, setYearSort] = React.useState(null);
 
   const { movies, total, loading } = useSelector((state) => state.movie);
 
-  const selectMovie = movies.find((movie)=> movie._id === commentModal.modalData?._id);
+  const selectMovie = movies.find((movie) => movie._id === commentModal.modalData?._id);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -65,11 +67,15 @@ export default () => {
     setPage(0);
   };
 
+  const toggleYearSort = () => { 
+    setYearSort(yearSort==='desc' ? 'asc':'desc');
+  };
+
   useEffect(() => {
 
-    dispatch(fetchMovies({ page: page + 1, limit, search, year }));
+    dispatch(fetchMovies({ page: page + 1, limit, search, year, ...(yearSort && { sort: `year|${yearSort}` }) }));
 
-  }, [dispatch, limit, page, search, year]);
+  }, [dispatch, limit, page, search, year, yearSort]);
 
 
   return (
@@ -91,7 +97,15 @@ export default () => {
             <TableHead>
               <TableRow>
                 <TableCell className="table-header">Title</TableCell>
-                <TableCell className="table-header">Year</TableCell>
+                <TableCell className="table-header">
+                  <TableSortLabel
+                    active={Boolean(yearSort)}
+                    direction={yearSort||'sort'}
+                    onClick={toggleYearSort}
+                  >
+                    Year (sort)
+                  </TableSortLabel>
+                </TableCell>
                 <TableCell className="table-header">Actors</TableCell>
                 <TableCell className="table-header">Genres</TableCell>
                 <TableCell className="table-header">Actions</TableCell>
