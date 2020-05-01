@@ -4,6 +4,7 @@ import delay from '../../util/delay';
 import { NotificationManager } from 'react-notifications';
 
 const baseUrl = "http://127.0.0.1:3000/api";
+
 export const fetchMovies = (query) => {
   return async (dispatch) => {
     dispatch(fetchMoviesStarted());
@@ -44,6 +45,7 @@ export const fetchMoviesCompletions = (query) => {
     }
   }
 };
+
 
 export const fetchMoviesStarted = () => {
   return {
@@ -87,3 +89,4 @@ export const fetchMoviesCompletionsSuccess = (payload) => {
     type: actionTypes.FETCH_MOVIES_COMPLETION_SUCCESS
   };
 };
+

@@ -71,7 +71,7 @@ export default () => {
 
   return (
     <div className={classes.root}>
-      <CommentModal isOpen={commentModal.isOpen} handleClose={commentModal.close} />
+      {commentModal.isOpen && <CommentModal movie={commentModal.modalData} isOpen={commentModal.isOpen} handleClose={commentModal.close} />}
       <Paper className={`${classes.paper} tableContainer`}>
         <Grid container direction="row" justify="center" spacing={2}>
           <Grid item md={4} xs={11} className={classes.form}>
@@ -142,7 +142,8 @@ const RecordTableRow = ({ movie, onCommentClicked }) => (
       <Button
         onClick={() => onCommentClicked(movie)}
         variant="contained"
-        color="default"
+        size="small"
+     
         startIcon={<Chat />}
       >
         Comments
