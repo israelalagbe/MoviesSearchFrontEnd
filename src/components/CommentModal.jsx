@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
+import { useDispatch } from 'react-redux';
+import { addCommentToMovie } from '../store/actions/movie';
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -41,14 +43,15 @@ export default function CommentModal({
     handleClose,
     movie
 }) {
-    console.log(movie)
+    const dispatch = useDispatch();
     const classes = useStyles();
     const [comment, setComment] = useState('');
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(comment)
-        setComment('')
+
+        dispatch(addCommentToMovie({comment, id: movie._id}));
+        setComment('');
     };
     return (
 

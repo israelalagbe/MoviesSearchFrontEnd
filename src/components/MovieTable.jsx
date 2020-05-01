@@ -45,6 +45,7 @@ export default () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const commentModal = useModal();
+  
 
   const [page, setPage] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
@@ -52,6 +53,8 @@ export default () => {
   const [search, setSearchText] = React.useState('');
 
   const { movies, total, loading } = useSelector((state) => state.movie);
+
+  const selectMovie = movies.find((movie)=> movie._id === commentModal.modalData?._id);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -71,7 +74,8 @@ export default () => {
 
   return (
     <div className={classes.root}>
-      {commentModal.isOpen && <CommentModal movie={commentModal.modalData} isOpen={commentModal.isOpen} handleClose={commentModal.close} />}
+      {commentModal.isOpen && <CommentModal movie={selectMovie} isOpen={commentModal.isOpen} handleClose={commentModal.close} />}
+
       <Paper className={`${classes.paper} tableContainer`}>
         <Grid container direction="row" justify="center" spacing={2}>
           <Grid item md={4} xs={11} className={classes.form}>
@@ -94,7 +98,10 @@ export default () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {movies.map((movie, index) => <RecordTableRow onCommentClicked={commentModal.open} key={index} movie={movie} />)}
+
+              {movies.map(
+                (movie, index) =>
+                  <RecordTableRow onCommentClicked={commentModal.open} key={index} movie={movie} />)}
 
             </TableBody>
             <TableFooter>
@@ -143,7 +150,7 @@ const RecordTableRow = ({ movie, onCommentClicked }) => (
         onClick={() => onCommentClicked(movie)}
         variant="contained"
         size="small"
-     
+
         startIcon={<Chat />}
       >
         Comments

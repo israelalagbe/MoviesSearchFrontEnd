@@ -23,6 +23,19 @@ const movieReducer = (state = initialState, action) => {
       stateClone.total = action.payload.total;
       break;
     }
+    case actionTypes.ADD_COMMENT_TO_MOVIE: {
+      const movieId = action.payload.id;
+      const comment = action.payload.comment;
+      const movies = stateClone.movies;
+      stateClone.movies = movies.map((movie) => movie._id !== movieId ? movie : {
+        ...movie,
+        comments: [
+          comment,
+          ...movie.comments
+        ]
+      });
+      break;
+    }
     case actionTypes.FETCH_MOVIES_ERROR: {
       stateClone.loading = false;
       stateClone.error = action.payload;

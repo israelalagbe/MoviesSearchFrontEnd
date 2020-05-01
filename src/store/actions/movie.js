@@ -41,11 +41,38 @@ export const fetchMoviesCompletions = (query) => {
     } catch (error) {
 
       dispatch(fetchMoviesCompletionsError(error));
+      NotificationManager.error("Error occured while searching, please check your internet connection!")
 
     }
   }
 };
 
+export const addCommentToMovie = (payload) => {
+  return async (dispatch) => {
+    dispatch(addCommentToMovieStarted(payload));
+
+    try {
+      
+      await api.post(`${baseUrl}/movies/${payload.id}/comments`, {
+        comment: payload.comment
+      });
+     
+
+    } catch (error) {
+
+      dispatch(fetchMoviesCompletionsError(error));
+
+    }
+  }
+};
+
+
+export const addCommentToMovieStarted = (payload) => {
+  return {
+    type: actionTypes.ADD_COMMENT_TO_MOVIE,
+    payload
+  };
+};
 
 export const fetchMoviesStarted = () => {
   return {
