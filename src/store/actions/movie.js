@@ -8,10 +8,7 @@ export const fetchMovies = (query) => {
   return async (dispatch) => {
     dispatch(fetchMoviesStarted());
     try {
-      const {
-        movies,
-        total
-      } = await api.get(`${baseUrl}/movies`, {
+      const { movies, total } = await api.get(`${baseUrl}/movies`, {
         params: query
       });
       dispatch(fetchMoviesSuccess({
@@ -30,7 +27,9 @@ export const fetchMovies = (query) => {
 export const fetchMoviesCompletions = (query) => {
   return async (dispatch) => {
     dispatch(fetchMoviesCompletionsStarted());
+
     try {
+      
       const moviesCompletions = await api.get(`${baseUrl}/movies/completions`, {
         params: query
       });

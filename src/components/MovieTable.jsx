@@ -16,6 +16,7 @@ import TablePaginationActions from './TablePagination';
 import Grid from '@material-ui/core/Grid';
 import SearchForm from './SearchForm';
 import { makeStyles } from '@material-ui/core';
+import YearSearch from './YearSearch';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -58,6 +59,7 @@ export default () => {
   const dispatch = useDispatch();
   const [page, setPage] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
+  const [year, setYear] = React.useState('');
   const [search, setSearchText] = React.useState('');
 
   const { movies, total, loading } = useSelector((state) => state.movie);
@@ -73,17 +75,21 @@ export default () => {
 
   useEffect(() => {
 
-    dispatch(fetchMovies({ page: page + 1, limit, search }));
+    dispatch(fetchMovies({ page: page + 1, limit, search, year }));
 
-  }, [dispatch, limit, page, search]);
+  }, [dispatch, limit, page, search, year]);
 
 
   return (
     <div className={classes.root}>
       <Paper className={`${classes.paper} tableContainer`}>
-        <Grid container direction="row" justify="center" spacing={5}>
-          <Grid spacing={3} item md={4} xs={11} className={classes.form}>
+        <Grid container direction="row" justify="center" spacing={2}>
+          <Grid item md={4} xs={11} className={classes.form}>
             <SearchForm searchText={search} setSearchText={setSearchText} />
+            
+          </Grid>
+          <Grid  item md={12} className={classes.form}>
+            <YearSearch year={year} setYear={setYear} />
           </Grid>
         </Grid>
         <TableContainer>
